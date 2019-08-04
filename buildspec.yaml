@@ -4,15 +4,12 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - pip install --upgrade pip
-      - pip install pipenv --user
-      - pipenv install awscli aws-sam-cli
-      - pipenv run sam package --template-file template.yaml --s3-bucket codepipeline-us-east-1-852831150055 --output-template-file packaged-template.yaml
-
+      - aws cloudformation package --template-file template.yaml --s3-bucket codepipeline-us-east-1-852831150055 --output-template-file packaged-template.yaml
   install:
     runtime-versions:
       python: 3.7
 
 artifacts:
   files:
+    - template.yaml
     - packaged-template.yaml
